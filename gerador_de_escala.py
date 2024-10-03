@@ -100,9 +100,9 @@ def gerarEscala(data_inicio, quantidade_de_dias, quantidade_sentinelas, feriados
                     disponibilidade = ast.literal_eval(df_atiradores.loc[sentinela,'disponibilidade'])
                     ultimo_servico_preta = df_atiradores.loc[sentinela,'ultima_escala_preta']
                     ultimo_servico_vermelha = df_atiradores.loc[sentinela,'ultima_escala_vermelha']
+                    nome = df_atiradores.loc[sentinela,'nome']
 
-                    if (data_da_escala.weekday() in disponibilidade) & (ultimo_servico_preta != dia_anterior) & (ultimo_servico_vermelha != dia_anterior):
-                        nome = df_atiradores.loc[sentinela,'nome']
+                    if (data_da_escala.weekday() in disponibilidade) & (ultimo_servico_preta != dia_anterior) & (ultimo_servico_vermelha != dia_anterior) & ("rod" not in nome.lower()):
                         escala_do_dia[f"sent{n_sent}"] = nome
                         df_atiradores.loc[sentinela,'ultima_escala_vermelha'] = data_da_escala.strftime("%Y-%m-%d")
                         n_sent += 1
